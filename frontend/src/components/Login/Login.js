@@ -30,15 +30,24 @@ export default function Login({ onlogin }) {
                 onlogin(result.token);
                 localStorage.setItem('token', result.token);
                 setMessage('Login successful! Redirecting...'); 
+                handleMessage();
                 setTimeout(() => navigate('/'), 2000); 
             } else {
-                console.log('Login error', result.message);
+                // console.log('Login error', result.message);
                 setMessage(result.message || 'Login failed. Please try again.'); 
+                handleMessage();
             }
         } catch (error) {
-            console.log('Error sending login request:', error);
+            // console.log('Error sending login request:', error);
             setMessage('An error occurred. Please try again later.'); 
+            handleMessage();
         }
+    };
+
+    const handleMessage = () => {
+        setTimeout(() => {
+            setMessage('');
+        }, 3000); 
     };
 
     return (
@@ -78,7 +87,7 @@ export default function Login({ onlogin }) {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <div>
-                            <button type="submit" className="btn mx-3">
+                            <button type="submit" className="btn mx-3" onClick={handleMessage}>
                                 Login
                             </button>
                             <Link to='/signup' className="btn" style={{ padding: "13px" }}>

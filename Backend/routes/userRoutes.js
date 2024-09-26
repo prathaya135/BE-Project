@@ -7,5 +7,6 @@ const router = express.Router();
 router.post('/sign_in', userController.createUser);
 router.post('/login', userController.loginUser);
 router.get('/me',authMiddleware,userController.getMe);
+router.get('/confirm-email',userController.confirmEmail);
 
 module.exports = router;
