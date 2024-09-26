@@ -8,7 +8,7 @@ import Signup from './components/Signup/Signup';
 import ErrorPage from './components/Errorpage/Error';
 import './App.css';
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   useEffect(()=>{
     const token=localStorage.getItem('authToken');
     if(token){

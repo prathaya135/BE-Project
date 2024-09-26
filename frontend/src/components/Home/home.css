@@ -11,6 +11,10 @@
 .image-container {
     flex: 1; 
     margin-right: 20px; 
+    max-width: 721px;
+    height: auto;
+    /* margin-top: 60px; */
+    margin-left: 40px;
 }
 
 .image {

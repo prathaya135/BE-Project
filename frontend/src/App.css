@@ -10,3 +10,7 @@
     overflow: hidden;
     font-family: 'Segoe UI', bold;
   }
+
+  canvas{
+    height: 150vh;
+  }

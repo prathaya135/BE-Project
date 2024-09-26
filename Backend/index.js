@@ -3,11 +3,11 @@ const express = require('express');
 const app = express();
 const cors=require('cors');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
-const DB='mongodb://localhost:27017/SignVerification';
+const DB = 'mongodb+srv://bprathamesh135:lgNpmFsGjQUraruN@cluster0.2vqlvpu.mongodb.net/SignVerification?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(DB,{
     useNewUrlParser: true,
