@@ -7,7 +7,11 @@ import Avatar from '../Avatar/Avatar';
 
 export default function Home() {
   const [text, setText] = useState('');
-  const [transcript, setTranscript] = useState('');  
+  const [transcript, setTranscript] = useState('');
+  
+  const [userData,setUserData]=useState(null);
+  const [loading,setLoading]=useState(true);
+  const [error,setError]=useState(null);
 
   const handleChange = (event) => {
       setText(event.target.value);
@@ -22,10 +26,25 @@ export default function Home() {
   useEffect(() => {
     const getdata = async () => {
       try {
-        const response = await fetch('http://localhost:3001/me');
-        console.log(response);
+        const token=localStorage.getItem('token');
+        const response = await fetch('http://localhost:3003/me',{
+          method:'GET',
+          headers:{
+            'Authorization':`Bearer ${token}`,
+            'Content-Type':'application/json'
+          }
+        });
+
+        if (!response) {
+          throw new Error('Failed to fetch user data');
+        }
+        const data =await response.json();
+        setUserData(data.data);
+        setLoading(false);
+
       } catch (error) {
         console.log('Data not fetched');
+        setLoading(false);
       }
     }
     getdata();
@@ -34,6 +53,10 @@ export default function Home() {
   useEffect(()=>{
     console.log('successfully updated');
   },[transcript])
+
+  useEffect(()=>{
+    console.log('successfully updated');
+  },[userData]);
   
   return (
     <>
@@ -42,7 +65,7 @@ export default function Home() {
           <h2 style={{ textAlign: "center", color: "blue" }}>
             <Typewriter
               options={{
-                strings: ['Hello !!'],
+                strings: [`Hello ${userData?.name || 'Guest'} !!`],
                 autoStart: true,
                 cursor: '',
                 loop: true,

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 
-export default function Login({onlogin}) {
+export default function Login({ onlogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate=useNavigate();
+    const [message, setMessage] = useState(''); 
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -15,7 +16,7 @@ export default function Login({onlogin}) {
         };
 
         try {
-            const response = await fetch('http://localhost:3001/login', {
+            const response = await fetch('http://localhost:3003/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,13 +27,17 @@ export default function Login({onlogin}) {
             const result = await response.json();
             if (response.ok) {
                 console.log('Login successful', result);
-                onlogin(result.token)
-                navigate('/');
+                onlogin(result.token);
+                localStorage.setItem('token', result.token);
+                setMessage('Login successful! Redirecting...'); 
+                setTimeout(() => navigate('/'), 2000); 
             } else {
                 console.log('Login error', result.message);
+                setMessage(result.message || 'Login failed. Please try again.'); 
             }
         } catch (error) {
             console.log('Error sending login request:', error);
+            setMessage('An error occurred. Please try again later.'); 
         }
     };
 
@@ -50,6 +55,11 @@ export default function Login({onlogin}) {
             <div className="my-2">
                 <h4 className="h4-login">Login</h4>
             </div>
+            {message && (
+                <div className="alert alert-info">
+                    {message}
+                </div>
+            )}
             <div className="container">
                 <div className="row justify-content-center">
                     <form onSubmit={handleSubmit} style={{ alignItems: "center" }}>

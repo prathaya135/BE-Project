@@ -72,15 +72,31 @@ const loginUser = async (req, res) => {
         });
     }
 };
-const getMe = (req, res) => {
-    const user = req.user; 
+const getMe = async(req, res) => {
+    try {
+        const userId=req.user.id;
+        const user=await User.findById(userId);
+        if(!user){
+            return res.status(404).json({
+                status:"fail",
+                message:"User not found"
+            });
+        }
 
-    res.status(200).json({
-        status: 'success',
-        data: {
-            user,
-        },
-    });
+        res.status(200).json({
+            status:"success",
+            data:{
+                name:user.name,
+                email:user.email
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            status:'error',
+            message:'Server Error',
+            error:error.message
+        });
+    }
 };
 
 module.exports = { createUser, loginUser, getMe };
