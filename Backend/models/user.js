@@ -1,6 +1,6 @@
-const mongoose =require('mongoose');
+const mongoose = require('mongoose');
 
-const userSchema=mongoose.Schema({
+const userSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -10,21 +10,26 @@ const userSchema=mongoose.Schema({
         required: true,
         unique: true,
         lowercase: true,
-        validator:function(v){
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-        },
-        message:props=>`${props.value} is not a valid email!`
+        validate: { 
+            validator: function (v) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+            },
+            message: (props) => `${props.value} is not a valid email!`
+        }
     },
     password: {
         type: String,
         required: true,
     },
+    isConfirmed: {
+        type: Boolean,
+        default: false,
+    },
     createdAt: {
         type: Date,
         default: Date.now,
     },
-})
+});
+const User = mongoose.model('User', userSchema);
 
-const User =mongoose.model('User',userSchema);
-
-module.exports=User;
+module.exports = User;

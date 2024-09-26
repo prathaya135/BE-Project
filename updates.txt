@@ -24,7 +24,7 @@ Implement a system where users can rate the accuracy of the transcription and si
 
 
 
-25. Notifications and Reminders => Prathamesh
+25. Reminders => Prathamesh
 Enable users to set reminders for practice sessions or new content releases, helping them stay engaged with their learning journey.
 
 

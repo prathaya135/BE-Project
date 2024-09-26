@@ -6,6 +6,7 @@ export default function Login() {
   const [name,setName]=useState('');
   const [password,setPassword]=useState('');
   const navigate=useNavigate();
+  const [message, setMessage] = useState('');
 
     const handleClick=async (event)=>{
 
@@ -24,20 +25,27 @@ export default function Login() {
             body:JSON.stringify(sign_up),
           });
           if (response.ok) {
-            console.log('SignUp successful');
-            navigate('/');
+            setMessage('Confirmation email sent successfully');
+            handleSubmit();
           }else{
-            console.log('Error SignUp');
+            setMessage('Error SignUp');
+            handleSubmit();
           }
         } catch (error) {
-          console.log('Error sending login request:', error);
+          setMessage(`Error sending sign request: ${error}`);
+          handleSubmit();
         }
     }
+    const handleSubmit = () => {
+        setTimeout(() => {
+            setMessage('');
+        }, 3000); 
+    };
   return (
     <div
       className="text_area container my-3"
       style={{
-        height: "600px",
+        height: "620px",
         width: "600px",
         borderWidth: "2px",
         justifyContent: "center",
@@ -47,6 +55,11 @@ export default function Login() {
       <div className="my-3">
         <h4 className="h4-sign">Signup</h4>
       </div>
+      {message && (
+                <div className="alert alert-info my-3">
+                    {message}
+                </div>
+      )}
       <div className="container">
         <div className="row justify-content-center">
           <form onSubmit={handleClick} style={{ alignItems: "center" }}>
@@ -72,7 +85,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <div>
-              <button type="submit" className="btn mx-3">
+              <button type="submit" className="btn mx-3" onClick={handleSubmit}>
                 Submit
               </button>
               <Link to='/' className="btn"  style={{padding:"13px"}}>
