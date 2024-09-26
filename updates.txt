@@ -1,0 +1,39 @@
+6. Adjustable Settings => Prathamesh
+Let users adjust settings such as speech speed, text size, and background color for better accessibility.
+
+when click on the profile then :
+settings:
+	speed 
+	text size
+	name 
+password
+userID
+logo
+preferences 
+favorite phrases
+
+
+
+
+8. Educational Resources => mohak and Namya
+Add a section with resources or tutorials about sign language for users who want to learn more.
+
+
+22. Feedback and Rating System =>mohak
+Implement a system where users can rate the accuracy of the transcription and sign language videos, helping improve the quality of content over time.
+
+
+
+25. Notifications and Reminders => Prathamesh
+Enable users to set reminders for practice sessions or new content releases, helping them stay engaged with their learning journey.
+
+
+26. FAQs and Help Section => Namya
+Provide an interactive FAQ section where users can type in questions and receive instant answers or relevant resources.
+
+
+10. Community Interaction => Prathamesh
+Include a forum or chat feature where users can interact, share tips, and support each other in learning sign language.
+
+
+home profile about community feedbacks logout

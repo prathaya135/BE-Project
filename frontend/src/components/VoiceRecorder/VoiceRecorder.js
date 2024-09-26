@@ -1,11 +1,11 @@
+
 import React, { useState } from 'react';
 import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
 import './VoiceRecorder.css';
 
-export default function VoiceRecorder() {
+export default function VoiceRecorder({ setTranscript }) {
     const recorderControls = useAudioRecorder();
     const [audioUrl, setAudioUrl] = useState('');
-    const [transcript,settranscript]=useState('');
 
     const submitAudio = async (blob) => {
         const form = new FormData();
@@ -20,7 +20,7 @@ export default function VoiceRecorder() {
             if (response.ok) {
                 const data = await response.json();
                 console.log('Audio submitted successfully:', data.transcription);
-                settranscript(data.transcript);
+                setTranscript(data.transcription);
             } else {
                 console.error('Audio Submission failed:', response.statusText);
             }
@@ -33,7 +33,6 @@ export default function VoiceRecorder() {
         <div className="voice-recorder">
             <AudioRecorder
                 onRecordingComplete={(blob) => {
-                    // addAudioElement(blob);
                     submitAudio(blob);
                 }}
                 recorderControls={recorderControls}
