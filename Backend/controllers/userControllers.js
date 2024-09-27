@@ -69,12 +69,18 @@ const loginUser = async (req, res) => {
         }
 
         const token = createToken(user._id);
+        
+        const updatedUser = await User.findOneAndUpdate(
+            { email: email },
+            { lastLogin: new Date() },  
+            { new: true, upsert: true } 
+        );
 
         res.status(200).json({
             status: 'success',
             token,
             data: {
-                user,
+                user:updatedUser
             },
         });
     } catch (error) {
