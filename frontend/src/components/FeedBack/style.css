@@ -1,0 +1,97 @@
+.feedback-form {
+    max-width: 1000px; 
+    margin: auto;
+    padding: 20px; 
+    border-radius: 22px; 
+    background-color: rgba(249, 249, 249, 0.5); /* Transparent background */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+  }
+  
+  .feedback-form h2 {
+    font-family: 'Segoe UI', bold; 
+    font-size: 35px; 
+    margin-bottom: 2rem; 
+    text-align: center; 
+  }
+  
+  .feedback-form .form-group {
+    margin-bottom: 15px; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+  }
+  
+  .feedback-form .star-rating {
+    display: flex; 
+    cursor: pointer;
+    justify-content: center;
+  }
+  
+  .feedback-form .star {
+    font-size: 50px; 
+    color: lightgray; 
+    margin-right: 5px; 
+  }
+  
+  .feedback-form .star.filled {
+    color: gold;
+  }
+  
+  .feedback-form textarea {
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 22px; 
+    height: 80px; /* Height for textarea */
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19); /* Shadow effect */
+    border: none; /* No border */
+    font-family: 'Montserrat regular'; /* Font for the textarea */
+    font-size: 20px; /* Font size for the textarea */
+    text-align: center; /* Center text */
+  }
+  
+  .feedback-form input[type="email"] {
+    width: 100%; /* Full width for the email input */
+    padding: 10px; /* Padding inside the input */
+    border-radius: 22px; /* Rounded corners */
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19); /* Shadow effect */
+    border: none; /* No border */
+    font-family: 'Montserrat regular'; /* Font for the input */
+    font-size: 20px; /* Font size for the input */
+    text-align: center; /* Center text */
+    margin-bottom: 15px; /* Space below input */
+  }
+  
+  .feedback-form select {
+    width: 100%; /* Full width for select */
+    padding: 10px; /* Padding inside select */
+    border-radius: 22px; /* Rounded corners */
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19); /* Shadow effect */
+    border: none; /* No border */
+    font-family: 'Montserrat regular'; /* Font for the select */
+    font-size: 20px; /* Font size for the select */
+  }
+  
+  .feedback-form button {
+    margin-top: 28px; /* Space above the button */
+    width: 165px; /* Button width */
+    height: 60px; /* Button height */
+    border-radius: 30px; /* Rounded corners */
+    background: #B58DED; /* Button background color */
+    border: none; /* No border */
+    font-family: 'Montserrat'; /* Font for the button */
+    font-size: 20px; /* Font size for the button */
+    color: #FFFFFF; /* Button text color */
+    box-shadow: 0 4px 8px 0 rgba(181, 141, 237, 0.7), 0 6px 20px 0 rgba(181, 141, 237, 0.9); /* Shadow effect */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: block; /* Center the button */
+    margin-left: auto; /* Auto margin for centering */
+    margin-right: auto; /* Auto margin for centering */
+  }
+  
+  .feedback-form p {
+    text-align: center; /* Center the status message */
+    font-family: 'Montserrat light'; /* Font for messages */
+    font-size: 18px; /* Font size for messages */
+    color: #0E4579; /* Color for messages */
+  }
+  

@@ -26,6 +26,11 @@ function ColorSchemesExample({onlogout}) {
                     About
                   </Link>
                 </li>
+                <li className="nav-item ">
+                  <Link className="nav-link" to="/feedback">
+                    FeedBacks
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/signup" onClick={onlogout}>
                   <FontAwesomeIcon icon={faSignOutAlt} />

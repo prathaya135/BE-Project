@@ -19,15 +19,6 @@ favorite phrases
 Add a section with resources or tutorials about sign language for users who want to learn more.
 
 
-22. Feedback and Rating System =>mohak
-Implement a system where users can rate the accuracy of the transcription and sign language videos, helping improve the quality of content over time.
-
-
-
-25. Reminders => Prathamesh
-Enable users to set reminders for practice sessions or new content releases, helping them stay engaged with their learning journey.
-
-
 26. FAQs and Help Section => Namya
 Provide an interactive FAQ section where users can type in questions and receive instant answers or relevant resources.
 

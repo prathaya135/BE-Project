@@ -33,12 +33,10 @@ export default function Login({ onlogin }) {
                 handleMessage();
                 setTimeout(() => navigate('/'), 2000); 
             } else {
-                // console.log('Login error', result.message);
                 setMessage(result.message || 'Login failed. Please try again.'); 
                 handleMessage();
             }
         } catch (error) {
-            // console.log('Error sending login request:', error);
             setMessage('An error occurred. Please try again later.'); 
             handleMessage();
         }

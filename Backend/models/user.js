@@ -1,3 +1,4 @@
+const { type } = require('express/lib/response');
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
@@ -20,6 +21,11 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
+    },
+    lastLogin:{
+        type:Date,
+        require:true,
+        default:Date.now,
     },
     isConfirmed: {
         type: Boolean,
