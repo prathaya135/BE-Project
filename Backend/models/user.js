@@ -35,6 +35,10 @@ const userSchema = mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    reminderMailTime: {
+        type: Date,
+        default: Date.now,
+    }
 });
 const User = mongoose.model('User', userSchema);
 
