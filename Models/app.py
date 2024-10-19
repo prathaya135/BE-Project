@@ -3,6 +3,8 @@ from flask_cors import CORS
 import speech_recognition as sr
 import os
 import subprocess
+from Text_Tokenization import main_func
+
 
 app = Flask(__name__)
 CORS(app)
@@ -25,6 +27,9 @@ def transcribe(audio_file):
         audio_data = recognizer.record(source)
         try:
             text = recognizer.recognize_google(audio_data)
+            print(text)
+            text=main_func(text)
+            print(text)
         except sr.UnknownValueError:
             text = "Sorry, I could not understand the audio."
         except sr.RequestError:
