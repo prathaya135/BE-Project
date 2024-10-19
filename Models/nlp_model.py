@@ -8,6 +8,8 @@ import spacy
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -116,7 +118,9 @@ def main_func(text):
     text= preprocess_text_to_isl(text)
     words = word_tokenize(text)
     words=lemm(words)
-    return words
+    capitalized_words = [word.capitalize() for word in words]
+    return " ".join(capitalized_words)
+
 
 text = "How are you?"
 ans=main_func(text)
