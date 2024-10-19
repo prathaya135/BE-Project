@@ -19,6 +19,7 @@ export default function VoiceRecorder({ setTranscript }) {
 
             if (response.ok) {
                 const data = await response.json();
+                // console.log(data)
                 console.log('Audio submitted successfully:', data.transcription);
                 setTranscript(data.transcription);
             } else {

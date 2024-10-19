@@ -15,7 +15,7 @@ const sendConfirmationEmail = async (email, userId) => {
         },
     });
 
-    const confirmationURL = `http://localhost:3003/confirm-email?token=${confirmationToken}&userId=${userId}`;
+    const confirmationURL = `http://localhost:3002/confirm-email?token=${confirmationToken}&userId=${userId}`;
 
 
     const mailOptions = {
