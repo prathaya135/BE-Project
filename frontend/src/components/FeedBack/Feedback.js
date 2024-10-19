@@ -31,7 +31,7 @@ const FeedbackForm = () => {
     const getData = async () => {
       try {
         const token = localStorage.getItem('token'); // Corrected this line
-        const response = await fetch('http://localhost:3003/me', {
+        const response = await fetch('http://localhost:3002/me', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -72,7 +72,7 @@ const FeedbackForm = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3003/feedback', {
+      const response = await fetch('http://localhost:3000/feedback', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
