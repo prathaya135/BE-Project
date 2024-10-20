@@ -5,10 +5,12 @@ from nltk.stem import WordNetLemmatizer
 #Install Spacy
 import spacy
 
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('wordnet')
+# nltk.download('punkt')
+# nltk.download('punkt_tab')
+# nltk.download('stopwords')
+# nltk.download('averaged_perceptron_tagger')
+# nltk.download('averaged_perceptron_tagger_eng')
+# nltk.download('wordnet')
 
 
 from nltk.corpus import stopwords
@@ -121,10 +123,45 @@ def main_func(text):
     capitalized_words = [word.capitalize() for word in words]
     return " ".join(capitalized_words)
 
+import os
 
-text = "How are you?"
+def get_folder_titles(path):
+    folder_titles = set()
+
+    # Iterate through items in the specified path
+    for item in os.listdir(path):
+        item_name = item[:-4]
+        folder_titles.add(item_name)
+    
+    return folder_titles
+
+def return_file_path(ISL_sent , folders):
+    list = []
+    file_paths = []
+    database = []
+    database = folders
+    
+    list = ISL_sent.split(' ')
+
+    for w in list:
+        if w in folders:
+            file_paths.append("assets/" + w + ".mp4")
+        else:
+            for c in w:
+                file_paths.append("assets/" + c + ".mp4")
+
+    return file_paths
+
+folder_path = 'assets/'
+folders = get_folder_titles(folder_path)
+print(folders)
+
+text = "Hello I am Mohak"
 ans=main_func(text)
 print(ans)
+
+retrieved = return_file_path(ans , folders)
+print(retrieved)
 
 #Akash likes food
 #What is your name?

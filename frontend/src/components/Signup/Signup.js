@@ -17,7 +17,7 @@ export default function Login() {
           password
         }
         try {
-          const response=await fetch('http://localhost:3003/sign_in',{
+          const response=await fetch('http://localhost:3000/sign_in',{
             method:'POST',
             headers:{
               'Content-Type':'application/json'

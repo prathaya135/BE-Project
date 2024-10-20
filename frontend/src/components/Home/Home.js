@@ -4,10 +4,11 @@ import VoiceRecorder from '../VoiceRecorder/VoiceRecorder';
 import './home.css';
 import Typewriter from 'typewriter-effect';
 import Avatar from '../Avatar/Avatar';
+import Avatar_Videos from '../Avatar/Avatar_Video';
 
 export default function Home() {
   const [text, setText] = useState('');
-  const [transcript, setTranscript] = useState('');
+  const [transcript, setTranscript] = useState([]);
   
   const [userData,setUserData]=useState(null);
   const [loading,setLoading]=useState(true);
@@ -27,7 +28,7 @@ export default function Home() {
     const getdata = async () => {
       try {
         const token=localStorage.getItem('token');
-        const response = await fetch('http://localhost:3003/me',{
+        const response = await fetch('http://localhost:3000/me',{
           method:'GET',
           headers:{
             'Authorization':`Bearer ${token}`,
@@ -103,8 +104,9 @@ export default function Home() {
             </form>
           </div>
         </div>
-        <div className='image-container' style={{ textAlign: "center" }}>
-          <Avatar />
+        <div className='image-container' style={{ textAlign: "center",backgroundColor:'#444444' }}>
+          {/* <Avatar /> */}
+          <Avatar_Videos transcript={transcript}/>
         </div>
       </div>
     </>
