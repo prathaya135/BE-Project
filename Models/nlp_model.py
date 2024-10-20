@@ -156,7 +156,7 @@ folder_path = 'assets/'
 folders = get_folder_titles(folder_path)
 print(folders)
 
-text = "How are you?"
+text = "Hello I am Mohak"
 ans=main_func(text)
 print(ans)
 
