@@ -2,9 +2,10 @@
 import nltk
 from nltk.tag import pos_tag
 from nltk.stem import WordNetLemmatizer
-#Install Spacy
+# Install Spacy
 import spacy
 
+# nltk.download('punkt_tab')
 # nltk.download('punkt')
 # nltk.download('stopwords')
 # nltk.download('averaged_perceptron_tagger')
@@ -14,7 +15,7 @@ import spacy
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
-#Install en_core_web_sm: python -m spacy download en_core_web_sm 
+# Install en_core_web_sm: python -m spacy download en_core_web_sm 
 nlp = spacy.load("en_core_web_sm")
 stop_words = set(stopwords.words('english'))
 

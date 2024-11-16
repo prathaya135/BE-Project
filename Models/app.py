@@ -4,10 +4,20 @@ import speech_recognition as sr
 import os
 import subprocess
 from Text_Tokenization import main_func
+import tensorflow as tf
+import numpy as np
+import cv2
+from werkzeug.utils import secure_filename
+# from tensorflow.keras.preprocessing import image
 
 
 app = Flask(__name__)
 CORS(app)
+
+UPLOAD_FOLDER = 'uploads_image'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+model = tf.keras.models.load_model('./Sign_Language_Detection/saved_model/my_model.h5')
 
 def convert_mp3_to_wav(mp3_file_path, wav_file_path):
     command = [
@@ -27,13 +37,11 @@ def transcribe(audio_file):
         audio_data = recognizer.record(source)
         try:
             text = recognizer.recognize_google(audio_data)
-            print(text)
-            text=main_func(text)
-            print(text)
         except sr.UnknownValueError:
             text = "Sorry, I could not understand the audio."
         except sr.RequestError:
             text = "Sorry, there was an issue with the request."
+        text=main_func(text)
     return text
 
 @app.route('/transcribe', methods=['POST'])
@@ -65,6 +73,44 @@ def upload_audio():
     os.remove(wav_file_path)
 
     return jsonify({'transcription': transcription})
+    # return jsonify({'transcription': "Pratham"})
+
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    print("Request received")
+    print("Content-Type:", request.content_type)
+    print("Files:", request.files)
+    if 'frame' not in request.files:
+        return jsonify({'error': 'No file uploaded'}), 400
+    
+    file = request.files['frame']
+    filename = secure_filename(file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+    file.save(file_path)
+    img = cv2.imread(file_path)
+
+    if img is None:
+        os.remove(file_path)  
+        return jsonify({'error': 'Image decoding failed'}), 400
+    input_width, input_height = 200, 200
+    img_resized = cv2.resize(img, (input_width, input_height)) / 255.0
+    img_resized = np.expand_dims(img_resized, axis=0)
+
+    print("Original image shape:", img.shape)
+    print("Preprocessed image shape:", img_resized.shape)
+    predictions = model.predict(img_resized)
+    predicted_class = np.argmax(predictions)
+    confidence = predictions[0][predicted_class]
+    print("Prediction scores:", predictions)
+    print("Predicted class:", predicted_class)
+    print("Confidence:", confidence)
+    os.remove(file_path)
+
+    return jsonify({'prediction': int(predicted_class), 'confidence': float(confidence)})
+
+
 
 if __name__ == '__main__':
     if not os.path.exists('uploads'):

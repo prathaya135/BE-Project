@@ -21,6 +21,11 @@ function ColorSchemesExample({onlogout}) {
                   <FontAwesomeIcon icon={faHome} /> Home
                   </Link>
                 </li>
+                <li className="nav-item active ">
+                  <Link className="nav-link" to="/SignDetection">
+                     SignDetection
+                  </Link>
+                </li>
                 <li className="nav-item ">
                   <Link className="nav-link" to="/about">
                     About

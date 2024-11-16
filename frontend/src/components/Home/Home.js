@@ -28,7 +28,7 @@ export default function Home() {
     const getdata = async () => {
       try {
         const token=localStorage.getItem('token');
-        const response = await fetch('http://localhost:3000/me',{
+        const response = await fetch('http://localhost:3001/me',{
           method:'GET',
           headers:{
             'Authorization':`Bearer ${token}`,

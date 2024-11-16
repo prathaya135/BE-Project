@@ -1,0 +1,19 @@
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+
+  backend:
+    build:
+      context: ./Backend
+    ports:
+      - "3001:3001"
+
+  python-model:
+    build:
+      context: ./Models
+    ports:
+      - "5000:5000"

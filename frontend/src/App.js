@@ -6,10 +6,11 @@ import About from './components/About/About';
 import Home from './components/Home/Home';
 import Signup from './components/Signup/Signup';
 import ErrorPage from './components/Errorpage/Error';
-import './App.css';
 import Feedback from './components/FeedBack/Feedback';
+import SignDetection from './components/SignDetection/SignDetection'
+import './App.css';
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(()=>{
     const token=localStorage.getItem('authToken');
@@ -34,6 +35,7 @@ function App() {
             <Route path='/' element={isAuthenticated ? <Home></Home> : <Login onlogin={handlelogin}></Login>}></Route>
             <Route path='/about' element={isAuthenticated ? <About></About> : <Login onlogin={handlelogin}></Login>}></Route>
             <Route path='/feedback' element={isAuthenticated ? <Feedback></Feedback> : <Login onlogin={handlelogin}></Login>}></Route>
+            <Route path='/SignDetection' element={isAuthenticated ? <SignDetection></SignDetection> : <Login onlogin={handlelogin}></Login>}></Route>
             <Route path='/signup' element={<Signup></Signup>}></Route>
             <Route path='*' element={<ErrorPage/>}></Route>
         </Routes>

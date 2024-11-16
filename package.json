@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "start": "concurrently \"npm run frontend\" \"npm run backend\" \"npm run python-model\"",
+        "frontend": "cd frontend && npm start",
+        "backend": "cd Backend && npm run dev",
+        "python-model": "cd Models && python app.py"
+    },
+    "devDependencies": {
+        "concurrently": "^9.0.1"
+    }
+}

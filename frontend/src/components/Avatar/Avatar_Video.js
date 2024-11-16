@@ -8,7 +8,7 @@ function VideoComponent({ transcript }) {
   useEffect(() => {
     if (transcript && transcript.length > 0) {
       const currentWord = transcript[currentWordIndex];
-      const url = `http://localhost:3000/videos/${currentWord}.mp4`;
+      const url = `http://localhost:3001/videos/${currentWord}.mp4`;
       setMp4Url(url);
     }
   }, [transcript, currentWordIndex]);

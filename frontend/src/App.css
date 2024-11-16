@@ -9,6 +9,7 @@
   body {
     overflow: hidden;
     font-family: 'Segoe UI', bold;
+    /* color: white; */
   }
 
   canvas{
