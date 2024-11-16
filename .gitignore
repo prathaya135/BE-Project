@@ -1,2 +1,7 @@
 .myenv/
 
+node_modules/
+Models/Sign_Language_Detection/Saved_model/my_model.h5
+
+
+
