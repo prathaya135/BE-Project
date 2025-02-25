@@ -44,6 +44,27 @@ def transcribe(audio_file):
         text=main_func(text)
     return text
 
+@app.route('/textscribe', methods=['POST'])
+def textscribe():
+    try:
+        print("Received request at /textscribe")  # Debugging
+        data = request.get_json()
+        print("Request JSON:", data)  # Debugging
+        
+        if not data or 'text' not in data:
+            return jsonify({'error': 'Invalid request, missing "text" field'}), 400
+
+        text = main_func(data['text'])  # Ensure main_func is correct
+        print("Processed Text:", text)  # Debugging
+
+        return jsonify({'transcription': text})
+
+    except Exception as e:
+        print("Error in textscribe:", str(e))  # Log the error
+        return jsonify({'error': str(e)}), 500
+
+
+
 @app.route('/transcribe', methods=['POST'])
 def upload_audio():
     if 'audio' not in request.files:
@@ -71,7 +92,7 @@ def upload_audio():
 
     os.remove(audio_file_path)
     os.remove(wav_file_path)
-
+    print(transcription);
     return jsonify({'transcription': transcription})
     # return jsonify({'transcription': "Pratham"})
 
@@ -115,4 +136,5 @@ def predict():
 if __name__ == '__main__':
     if not os.path.exists('uploads'):
         os.makedirs('uploads')
-    app.run(port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
+

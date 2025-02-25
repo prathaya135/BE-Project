@@ -3,17 +3,17 @@ import React from 'react';
 const teamMembers = [
   {
     name: "Prathamesh Bhokare",
-    role: "Frontend developer",
+    role: "Mern stack developer & Team Leader",
     contact: "+91 9975583478"
   },
   {
     name: "Mohak Borole",
-    role: "Backend developer",
+    role: "Deep learning specialist",
     contact: "+91 8669114598"
   },
   {
     name: "Namya Agrawal",
-    role: "Backend developer & ML specialist",
+    role: "ML specialist",
     contact: "+91 6269218018"
   },
   {
@@ -35,7 +35,7 @@ const TeamMemberCard = ({ member }) => {
 
 const TeamMembersList = () => {
   return (
-    <div style={{marginTop:"150px"}}>
+    <div style={{marginTop:"80px"}}>
     <h2 style={{textAlign:"center",backgroundColor:"#4f95e1",padding:"2px 4px",borderRadius:"4px"}}>OUR TEAM</h2>
     <div style={containerStyle} className='container'>
       {teamMembers.map((member, index) => (

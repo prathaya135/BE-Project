@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { HandLandmarker, FilesetResolver } from '@mediapipe/tasks-vision';
-import Typewriter from 'typewriter-effect';
 import './SignLanguageDetection.css'
 
 const hand_connection=[
@@ -25,7 +24,6 @@ const HandDetection = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [predicted,setpredicted]=useState('');
-  // const [count,setcount]=useState(0);
   var count=0;
 
   // Initialize HandLandmarker
@@ -87,13 +85,13 @@ const HandDetection = () => {
   const predictWebcam = async () => {
     const video = webcamRef.current;
     const canvas = canvasRef.current;
-    const canvasCtx = canvas.getContext('2d');
+    const canvasCtx = canvas?.getContext('2d');
 
     // Ensure the canvas size matches the video
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    canvas.width = video?.videoWidth;
+    canvas.height = video?.videoHeight;
 
-    if (!canvas.width || !canvas.height) {
+    if (!canvas?.width || !canvas?.height) {
       console.warn('Invalid canvas size, waiting for video to load...');
       return;
     }
@@ -141,36 +139,51 @@ const HandDetection = () => {
 
   const sendCanvasFrame = async () => {
     const canvas = canvasRef.current;
-    if (canvas) {
-      canvas.toBlob(async (blob) => {
-        if (blob) {
-          const formData = new FormData();
-          // console.log(blob);
-          formData.append('frame', blob, 'frame.png');
+    if (!canvas) return;
   
-          try {
-            const response = await fetch('http://127.0.0.1:5000/predict', {
-              method: 'POST',
-              body: formData,
-            });
-  
-            const data = await response.json();
-            console.log(data);
-            // console.log([...formData.entries()]);
-            const predictedClass = data.prediction;
-            const predictedLabel = categories[predictedClass];
-            setpredicted(predictedLabel);
-            console.log(predicted);
-
-          } catch (error) {
-            console.error('Error sending canvas frame:', error);
+    // Convert canvas to Blob asynchronously
+    const createBlob = () => {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            resolve(blob);
+          } else {
+            reject(new Error("Failed to create Blob from canvas"));
           }
-        } else {
-          console.error('Failed to create Blob from canvas');
-        }
-      }, 'image/png');
+        }, "image/png");
+      });
+    };
+  
+    try {
+      while (true) {
+        const blob = await createBlob(); // Wait for Blob creation
+  
+        const formData = new FormData();
+        formData.append("frame", blob, "frame.png");
+  
+        // Send the frame to backend
+        const response = await fetch("http://127.0.0.1:5000/predict", {
+          method: "POST",
+          body: formData,
+        });
+  
+        const data = await response.json();
+        console.log("Response:", data);
+  
+        // Update predicted label
+        const predictedClass = data.prediction;
+        const predictedLabel = categories[predictedClass];
+        setpredicted(predictedLabel);
+        console.log("Predicted:", predictedLabel);
+  
+        // Introduce a slight delay (optional, adjust as needed)
+        await new Promise((resolve) => setTimeout(resolve, 100)); 
+      }
+    } catch (error) {
+      console.error("Error sending canvas frame:", error);
     }
   };
+  
   
 
   useEffect(() => {
@@ -193,33 +206,21 @@ const HandDetection = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <i>
-          <h2 style={{ textAlign: "center", color: "blue" }}>
-            <Typewriter
-              options={{
-                strings: [`Sign Language Detection`],
-                autoStart: true,
-                cursor: '',
-                loop: true,
-              }}
-            />
-          </h2>
-        </i>
       <div>
         <button onClick={enableCam} className='btn_SignDetection'>
           {webcamRunning ? 'Disable Webcam' : 'Enable Webcam'}
         </button>
       </div>
-      <div style={{fontWeight:'bolder',fontSize:'20px'}}>Here is What You Say : {predicted}</div>
+      <div style={{fontWeight:'bolder',fontSize:'20px',marginBottom:'20px'}}>Here is What You Say : {predicted}</div>
       <div style={{ position: 'relative' }}>
         <video
-          ref={webcamRef}
-          style={{ width: '40%', height: '40%' }}
+          ref={webcamRef || null}
+          style={{ width: '40%', height: '40%', backgroundColor:'#444444' }}
           autoPlay
           playsInline
         ></video>
         <canvas
-          ref={canvasRef}
+          ref={canvasRef || null}
           style={{
             top: 0,
             left: 0,
@@ -229,6 +230,7 @@ const HandDetection = () => {
           }}
         ></canvas>
       </div>
+      <div style={{fontWeight:'bolder',fontSize:'20px',color:'red',marginTop:'20px'}}>Please close the Camera After Use</div>
     </div>
   );
 };

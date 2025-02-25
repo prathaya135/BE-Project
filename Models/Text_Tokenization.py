@@ -4,6 +4,7 @@ from nltk.tag import pos_tag
 from nltk.stem import WordNetLemmatizer
 # Install Spacy
 import spacy
+import os
 
 # nltk.download('punkt_tab')
 # nltk.download('punkt')
@@ -119,10 +120,37 @@ def main_func(text):
     text= preprocess_text_to_isl(text)
     words = word_tokenize(text)
     words=lemm(words)
-    capitalized_words = [word.capitalize() for word in words]
+    words=process_and_compare("../assets",words)
     # return " ".join(capitalized_words)
+    capitalized_words = [word.capitalize() for word in words]
     return capitalized_words
 
+
+def get_folder_titles(path):
+    folder_titles = set()
+
+    # Iterate through items in the specified path
+    for item in os.listdir(path):
+        item_name = item[:-4].lower()
+        folder_titles.add(item_name)
+    return folder_titles
+
+def process_and_compare(path, capitalized_words):
+    folder_titles = get_folder_titles(path)
+    # print(folder_titles)
+    result_array = []
+
+    for word in capitalized_words:
+        if word in folder_titles:
+            result_array.append(word)
+        else:
+            # Convert the word into individual letters and add each letter
+            result_array.extend(list(word))
+
+    return result_array
+
+# word=main_func("I am Prathamesh")
+# print(word)
 
 # text = "How are you?"
 # ans=main_func(text)

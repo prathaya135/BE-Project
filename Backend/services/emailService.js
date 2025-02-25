@@ -11,11 +11,11 @@ const sendConfirmationEmail = async (email, userId) => {
         secure: true,
         auth: {
             user: 'bprathamesh135@gmail.com',
-            pass: 'gmsq klyx bvny turb',
+            pass: 'froj xpor mypy alxo',
         },
     });
 
-    const confirmationURL = `http://localhost:3002/confirm-email?token=${confirmationToken}&userId=${userId}`;
+    const confirmationURL = `http://localhost:3001/confirm-email?token=${confirmationToken}&userId=${userId}`;
 
 
     const mailOptions = {

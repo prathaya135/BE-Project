@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Avatar from './Avatar';
 
 function VideoComponent({ transcript }) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -25,19 +24,31 @@ function VideoComponent({ transcript }) {
 
   return (
     <div>
+      <h4 style={{color: "rgba(255, 255, 255, 0.6)"}}>Avatar Performing the Sign Language:</h4>
       {mp4Url ? (
         <video
           autoPlay
           width="640"
-          height="560"
+          height="500"
           key={mp4Url}
           onEnded={handleVideoEnd}  
+          style={{alignContent:"center"}}
         >
           <source src={mp4Url} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       ) : (
-        <Avatar />
+        <video
+          autoPlay
+          width="640"
+          height="500"
+          key={mp4Url}
+          onEnded={handleVideoEnd}  
+          style={{alignContent:"center"}}
+        >
+          <source src={"http://localhost:3001/videos/Hello.mp4"} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       )}
     </div>
   );

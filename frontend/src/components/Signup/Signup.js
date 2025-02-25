@@ -45,7 +45,7 @@ export default function Login() {
     <div
       className="text_area container my-3"
       style={{
-        height: "620px",
+        height: "520px",
         width: "600px",
         borderWidth: "2px",
         justifyContent: "center",
@@ -56,9 +56,9 @@ export default function Login() {
         <h4 className="h4-sign">Signup</h4>
       </div>
       {message && (
-                <div className="alert alert-info my-3">
-                    {message}
-                </div>
+        <div className="alert alert-info my-3">
+            {message}
+        </div>
       )}
       <div className="container">
         <div className="row justify-content-center">

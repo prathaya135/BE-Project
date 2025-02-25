@@ -22,7 +22,7 @@
 }
 
 .text_input{
-    margin-top: 1.2rem;
+    margin-top: 18px;
     font-family: 'Montserrat regular';
     font-size: 20px;
     border: none;
@@ -31,7 +31,7 @@
 }
 
 .btn{
-    margin-top: 28px;
+    margin-top: 10px;
     width: 165px;
     height: 60px;
     border-radius: 30px;
@@ -42,6 +42,7 @@
     color: #FFFFFF;
     box-shadow: 0 4px 8px 0 rgba(181, 141, 237, 0.7), 0 6px 20px 0 rgba(181, 141, 237, 0.9);
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .login{

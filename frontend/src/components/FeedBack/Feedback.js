@@ -98,8 +98,8 @@ const FeedbackForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="feedback-form my-2">
-      <h2 style={{ textAlign: "center" }}>Feedback and Rating</h2>
+    <form onSubmit={handleSubmit} className="feedback-form my-1">
+      <h4 style={{ textAlign: "center",color:"red" }}>Feedback and Rating</h4>
 
       {submissionStatus && (
         <div className="alert alert-info" style={{ textAlign: "center" }}>
@@ -110,32 +110,50 @@ const FeedbackForm = () => {
         <label htmlFor="rating" style={{ fontWeight: "bold" }}>Rate the accuracy:</label>
         <StarRating rating={rating} setRating={setRating} />
       </div>
+      <div style={{ display: "flex", width: "100%", gap: "20px" }}>
+        <div className="form-group" style={{ flex: 1 }}>
+          <label htmlFor="category" style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>
+            Feedback Category:
+          </label>
+          <select
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "8px",
+              borderRadius: "8px",
+              border: "1px solid #ccc",
+            }}
+          >
+            <option value="accuracy">Accuracy</option>
+            <option value="clarity">Clarity</option>
+            <option value="helpfulness">Helpfulness</option>
+          </select>
+        </div>
 
-      <div className="form-group">
-        <label htmlFor="category" style={{ fontWeight: "bold" }}>Feedback Category:</label>
-        <select
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="accuracy">Accuracy</option>
-          <option value="clarity">Clarity</option>
-          <option value="helpfulness">Helpfulness</option>
-        </select>
+        <div className="form-group" style={{ flex: 1 }}>
+          <label htmlFor="importance" style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>
+            Importance:
+          </label>
+          <select
+            id="importance"
+            value={importance}
+            onChange={(e) => setImportance(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "8px",
+              borderRadius: "8px",
+              border: "1px solid #ccc",
+            }}
+          >
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="importance" style={{ fontWeight: "bold" }}>Importance:</label>
-        <select
-          id="importance"
-          value={importance}
-          onChange={(e) => setImportance(e.target.value)}
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </div>
 
       <div className="form-group">
         <label htmlFor="comment" style={{ fontWeight: "bold" }}>Comments:</label>
