@@ -37,7 +37,8 @@ function VideoComponent({ transcript }) {
           Your browser does not support the video tag.
         </video>
       ) : (
-        <Avatar />
+        <></>
+        // <Avatar />
       )}
     </div>
   );

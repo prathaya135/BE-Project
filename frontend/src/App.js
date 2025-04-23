@@ -9,7 +9,7 @@ import ErrorPage from './components/Errorpage/Error';
 import './App.css';
 import Feedback from './components/FeedBack/Feedback';
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(()=>{
     const token=localStorage.getItem('authToken');
